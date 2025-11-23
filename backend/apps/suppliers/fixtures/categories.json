@@ -1,0 +1,21 @@
+[
+    {"model": "suppliers.category", "pk": 1, "fields": {"name": "Мебель и интерьер", "slug": "furniture"}},
+    {"model": "suppliers.category", "pk": 2, "fields": {"name": "Строительство и ремонт", "slug": "construction"}},
+    {"model": "suppliers.category", "pk": 3, "fields": {"name": "Текстиль и одежда", "slug": "textile"}},
+    {"model": "suppliers.category", "pk": 4, "fields": {"name": "Продукты питания", "slug": "food"}},
+    {"model": "suppliers.category", "pk": 5, "fields": {"name": "Электроника и техника", "slug": "electronics"}},
+    {"model": "suppliers.category", "pk": 6, "fields": {"name": "Автотовары", "slug": "auto"}},
+    {"model": "suppliers.category", "pk": 7, "fields": {"name": "Бытовая химия", "slug": "chemicals"}},
+    {"model": "suppliers.category", "pk": 8, "fields": {"name": "Косметика и парфюмерия", "slug": "cosmetics"}},
+    {"model": "suppliers.category", "pk": 9, "fields": {"name": "Лесопромышленность", "slug": "timber"}},
+    {"model": "suppliers.category", "pk": 10, "fields": {"name": "Агропромышленность", "slug": "agro"}},
+    {"model": "suppliers.category", "pk": 11, "fields": {"name": "Агрохимия", "slug": "agro-chemicals"}},
+    {"model": "suppliers.category", "pk": 12, "fields": {"name": "Промышленное оборудование", "slug": "industrial"}},
+    {"model": "suppliers.category", "pk": 13, "fields": {"name": "Подарки и сувениры", "slug": "gifts"}},
+    {"model": "suppliers.category", "pk": 14, "fields": {"name": "Услуги для бизнеса", "slug": "b2b-services"}},
+    {"model": "suppliers.category", "pk": 15, "fields": {"name": "Товары 18+", "slug": "adult"}},
+    {"model": "suppliers.category", "pk": 16, "fields": {"name": "Юридические услуги", "slug": "legal"}},
+    {"model": "suppliers.category", "pk": 17, "fields": {"name": "Таможенные услуги", "slug": "customs"}},
+    {"model": "suppliers.category", "pk": 18, "fields": {"name": "Логистические услуги", "slug": "logistics"}},
+    {"model": "suppliers.category", "pk": 19, "fields": {"name": "Всё для дома", "slug": "home"}}
+  ]
