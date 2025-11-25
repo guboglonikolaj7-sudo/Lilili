@@ -6,11 +6,12 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/v1/suppliers/", include("apps.suppliers.urls")),
-    path("api/v1/orders/", include("apps.orders.urls")),
     path("api/v1/auth/", include("apps.users.urls")),
     path("api/v1/auth/login/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("api/v1/auth/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    path("api/v1/suppliers/", include("apps.suppliers.urls")),
+    path("api/v1/orders/", include("apps.orders.urls")),
 ]
 
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
