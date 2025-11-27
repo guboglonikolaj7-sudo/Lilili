@@ -11,7 +11,7 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='').split(',')
+ALLOWED_HOSTS = [host for host in config('ALLOWED_HOSTS', default='').split(',') if host]
 
 DJANGO_APPS = [
     'daphne',
@@ -95,7 +95,9 @@ AUTH_USER_MODEL = "users.User"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', default='').split(',')
+CORS_ALLOWED_ORIGINS = [
+    origin for origin in config('CORS_ALLOWED_ORIGINS', default='').split(',') if origin
+]
 
 REST_FRAMEWORK = {
     "DEFAULT_FILTER_BACKENDS": [
@@ -132,6 +134,23 @@ CHANNEL_LAYERS = {
         },
     },
 }
+
+FSSP_API_KEY = config('FSSP_API_KEY', default='')
+NEWDB_API_KEY = config('NEWDB_API_KEY', default='')
+FNS_API_KEY = config('FNS_API_KEY', default='')
+VERIFICATION_SUPPORTED_COUNTRIES = [
+    country.strip() for country in config(
+        'VERIFICATION_SUPPORTED_COUNTRIES',
+        default='Китай,Турция,Индия,Россия,Казахстан,Узбекистан',
+    ).split(',')
+    if country.strip()
+]
+CELERY_BROKER_URL = config('CELERY_BROKER_URL', default=redis_url)
+CELERY_RESULT_BACKEND = config('CELERY_RESULT_BACKEND', default=redis_url)
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = TIME_ZONE
 
 # Пагинация и rate limiting
 REST_FRAMEWORK.update({
