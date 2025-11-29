@@ -1,15 +1,12 @@
-from django.urls import path
-from .views import (
-    OrderListAPIView, OrderCreateAPIView, OfferCreateAPIView,
-    MyOrdersAPIView, OrderOffersAPIView
-)
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from . import views
 
-app_name = "orders"
+router = DefaultRouter()
+router.register(r'rfq', views.RFQViewSet, basename='rfq')
+router.register(r'quotes', views.QuoteViewSet, basename='quotes')
+router.register(r'messages', views.MessageViewSet, basename='messages')
 
 urlpatterns = [
-    path("", OrderListAPIView.as_view(), name="order-list"),
-    path("create/", OrderCreateAPIView.as_view(), name="order-create"),
-    path("my/", MyOrdersAPIView.as_view(), name="my-orders"),
-    path("my/<int:order_id>/offers/", OrderOffersAPIView.as_view(), name="order-offers"),
-    path("<int:order_id>/offers/", OfferCreateAPIView.as_view(), name="offer-create"),
+    path('', include(router.urls)),
 ]

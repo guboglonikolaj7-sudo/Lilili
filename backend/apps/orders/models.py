@@ -1,149 +1,155 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-from django.core.validators import MinValueValidator
-from django.core.exceptions import ValidationError
-from django.utils import timezone
+from apps.suppliers.models import Supplier, Category
 
 User = get_user_model()
 
-class Order(models.Model):
+class RFQ(models.Model):
+    """Запрос на котировку от покупателя"""
     STATUS_CHOICES = [
-        ('active', 'Активный'),
-        ('completed', 'Завершен'),
+        ('draft', 'Черновик'),
+        ('published', 'Опубликован'),
+        ('closed', 'Закрыт'),
         ('cancelled', 'Отменен'),
-        ('on_hold', 'На удержании'),
     ]
     
-    title = models.CharField("Название заказа", max_length=200)
-    description = models.TextField("Описание")
-    buyer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="orders")
+    title = models.CharField("Название закупки", max_length=255)
+    description = models.TextField("Техническое задание")
+    
     category = models.ForeignKey(
-        'suppliers.Category', 
-        on_delete=models.PROTECT, 
-        null=True,
-        verbose_name="Категория"
+        Category,
+        on_delete=models.PROTECT,
+        verbose_name="Категория товара"
     )
-    budget_min = models.DecimalField(
-        "Мин. бюджет", 
-        max_digits=12, 
-        decimal_places=2, 
-        null=True, 
-        blank=True,
-        validators=[MinValueValidator(0)]
+    
+    buyer = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="rfqs",
+        verbose_name="Закупщик"
     )
-    budget_max = models.DecimalField(
-        "Макс. бюджет", 
-        max_digits=12, 
-        decimal_places=2, 
-        null=True, 
-        blank=True,
-        validators=[MinValueValidator(0)]
-    )
-    region = models.CharField("Регион поставки", max_length=100)
-    deadline = models.DateField("Срок подачи предложений")
+    
+    budget_min = models.DecimalField("Бюджет от", max_digits=12, decimal_places=2, null=True, blank=True)
+    budget_max = models.DecimalField("Бюджет до", max_digits=12, decimal_places=2, null=True, blank=True)
+    
+    deadline = models.DateTimeField("Срок подачи котировок")
+    
     status = models.CharField(
-        "Статус", 
-        max_length=20, 
-        choices=STATUS_CHOICES, 
-        default='active'
+        "Статус",
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default='draft'
     )
-    created_at = models.DateTimeField("Создан", auto_now_add=True)
-    updated_at = models.DateTimeField("Обновлен", auto_now=True)
-    is_urgent = models.BooleanField("Срочный", default=False)
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     
     class Meta:
-        verbose_name = "Заказ"
-        verbose_name_plural = "Заказы"
-        ordering = ["-is_urgent", "-created_at"]
-        indexes = [
-            models.Index(fields=["status", "created_at"]),
-            models.Index(fields=["buyer", "created_at"]),
-            models.Index(fields=["category", "status"]),
-        ]
-
+        verbose_name = "Запрос на котировку"
+        verbose_name_plural = "Запросы на котировки"
+        ordering = ["-created_at"]
+    
     def __str__(self):
-        return f"#{self.id} {self.title}"
-    
-    def clean(self):
-        if self.deadline <= timezone.now().date():
-            raise ValidationError({"deadline": "Срок должен быть в будущем"})
-        
-        if self.budget_min and self.budget_max:
-            if self.budget_min > self.budget_max:
-                raise ValidationError({
-                    "budget_min": "Минимум не может быть больше максимума",
-                    "budget_max": "Максимум должен быть больше минимума"
-                })
-    
-    def save(self, *args, **kwargs):
-        self.full_clean()
-        super().save(*args, **kwargs)
+        return f"{self.title} ({self.buyer.email})"
 
-class Offer(models.Model):
-    order = models.ForeignKey(
-        Order, 
-        on_delete=models.CASCADE, 
-        related_name="offers",
-        verbose_name="Заказ"
+
+class Quote(models.Model):
+    """Котировка от поставщика на RFQ"""
+    STATUS_CHOICES = [
+        ('pending', 'На рассмотрении'),
+        ('accepted', 'Принято'),
+        ('rejected', 'Отклонено'),
+        ('withdrawn', 'Отозвано'),
+    ]
+    
+    rfq = models.ForeignKey(
+        RFQ,
+        on_delete=models.CASCADE,
+        related_name="quotes",
+        verbose_name="Закупка"
     )
+    
     supplier = models.ForeignKey(
-        User, 
-        on_delete=models.CASCADE, 
-        related_name="offers",
+        Supplier,
+        on_delete=models.CASCADE,
+        related_name="quotes",
         verbose_name="Поставщик"
     )
-    price = models.DecimalField(
-        "Цена", 
-        max_digits=12, 
-        decimal_places=2,
-        validators=[MinValueValidator(0)]
+    
+    price = models.DecimalField("Цена", max_digits=12, decimal_places=2)
+    currency = models.CharField("Валюта", max_length=3, default="USD")
+    
+    delivery_time_days = models.PositiveIntegerField("Срок поставки (дни)")
+    
+    notes = models.TextField("Комментарий", blank=True)
+    
+    attachment = models.FileField(
+        "Файл котировки",
+        upload_to="quotes/%Y/%m/",
+        blank=True
     )
-    delivery_days = models.PositiveIntegerField(
-        "Срок поставки (дни)",
-        validators=[MinValueValidator(1)]
+    
+    status = models.CharField(
+        "Статус",
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default='pending'
     )
-    comment = models.TextField("Комментарий", blank=True)
-    created_at = models.DateTimeField("Создано", auto_now_add=True)
-    updated_at = models.DateTimeField("Обновлено", auto_now=True)
-    is_selected = models.BooleanField("Выбрано", default=False)
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     
     class Meta:
-        verbose_name = "Предложение"
-        verbose_name_plural = "Предложения"
-        unique_together = ['order', 'supplier']
-        ordering = ["price", "delivery_days"]
-
-    def __str__(self):
-        return f"Предложение #{self.id} к заказу #{self.order.id}"
+        verbose_name = "Котировка"
+        verbose_name_plural = "Котировки"
+        unique_together = ['rfq', 'supplier']  # Один поставщик = одна котировка на RFQ
     
-    def save(self, *args, **kwargs):
-        if self.order.status != 'active':
-            raise ValidationError("Можно создавать предложения только к активным заказам")
-        super().save(*args, **kwargs)
+    def __str__(self):
+        return f"{self.supplier.name} → {self.rfq.title}: ${self.price}"
+
 
 class Message(models.Model):
-    order = models.ForeignKey(
-        Order, 
-        on_delete=models.CASCADE, 
-        related_name='messages',
-        verbose_name="Заказ"
-    )
-    sender = models.ForeignKey(
-        User, 
+    """Сообщения для чата между покупателем и поставщиками"""
+    SENDER_TYPES = [
+        ('buyer', 'Закупщик'),
+        ('supplier', 'Поставщик'),
+        ('system', 'Система'),
+    ]
+    
+    rfq = models.ForeignKey(
+        RFQ,
         on_delete=models.CASCADE,
+        related_name="messages",
+        verbose_name="Закупка"
+    )
+    
+    sender = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="messages",
         verbose_name="Отправитель"
     )
+    
+    sender_type = models.CharField(
+        "Тип отправителя",
+        max_length=20,
+        choices=SENDER_TYPES
+    )
+    
     content = models.TextField("Сообщение")
-    timestamp = models.DateTimeField("Время", auto_now_add=True)
-    is_read = models.BooleanField("Прочитано", default=False)
+    
+    attachment = models.FileField(
+        "Вложение",
+        upload_to="chat_files/%Y/%m/",
+        blank=True
+    )
+    
+    timestamp = models.DateTimeField(auto_now_add=True)
     
     class Meta:
         verbose_name = "Сообщение"
         verbose_name_plural = "Сообщения"
         ordering = ['timestamp']
-        indexes = [
-            models.Index(fields=["order", "timestamp"]),
-        ]
-
+    
     def __str__(self):
-        return f"Сообщение #{self.id} в заказе #{self.order.id}"
+        return f"{self.sender.email}: {self.content[:50]}"

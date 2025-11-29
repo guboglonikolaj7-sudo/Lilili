@@ -1,21 +1,1025 @@
 [
-    {"model": "suppliers.category", "pk": 1, "fields": {"name": "Мебель и интерьер", "slug": "furniture"}},
-    {"model": "suppliers.category", "pk": 2, "fields": {"name": "Строительство и ремонт", "slug": "construction"}},
-    {"model": "suppliers.category", "pk": 3, "fields": {"name": "Текстиль и одежда", "slug": "textile"}},
-    {"model": "suppliers.category", "pk": 4, "fields": {"name": "Продукты питания", "slug": "food"}},
-    {"model": "suppliers.category", "pk": 5, "fields": {"name": "Электроника и техника", "slug": "electronics"}},
-    {"model": "suppliers.category", "pk": 6, "fields": {"name": "Автотовары", "slug": "auto"}},
-    {"model": "suppliers.category", "pk": 7, "fields": {"name": "Бытовая химия", "slug": "chemicals"}},
-    {"model": "suppliers.category", "pk": 8, "fields": {"name": "Косметика и парфюмерия", "slug": "cosmetics"}},
-    {"model": "suppliers.category", "pk": 9, "fields": {"name": "Лесопромышленность", "slug": "timber"}},
-    {"model": "suppliers.category", "pk": 10, "fields": {"name": "Агропромышленность", "slug": "agro"}},
-    {"model": "suppliers.category", "pk": 11, "fields": {"name": "Агрохимия", "slug": "agro-chemicals"}},
-    {"model": "suppliers.category", "pk": 12, "fields": {"name": "Промышленное оборудование", "slug": "industrial"}},
-    {"model": "suppliers.category", "pk": 13, "fields": {"name": "Подарки и сувениры", "slug": "gifts"}},
-    {"model": "suppliers.category", "pk": 14, "fields": {"name": "Услуги для бизнеса", "slug": "b2b-services"}},
-    {"model": "suppliers.category", "pk": 15, "fields": {"name": "Товары 18+", "slug": "adult"}},
-    {"model": "suppliers.category", "pk": 16, "fields": {"name": "Юридические услуги", "slug": "legal"}},
-    {"model": "suppliers.category", "pk": 17, "fields": {"name": "Таможенные услуги", "slug": "customs"}},
-    {"model": "suppliers.category", "pk": 18, "fields": {"name": "Логистические услуги", "slug": "logistics"}},
-    {"model": "suppliers.category", "pk": 19, "fields": {"name": "Всё для дома", "slug": "home"}}
-  ]
+  {
+    "model": "suppliers.category",
+    "pk": 1,
+    "fields": {
+      "name": "Мебель и интерьер",
+      "slug": "furniture",
+      "parent": null,
+      "description": "Производители и поставщики мебели, интерьерных решений",
+      "icon": "🪑"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 101,
+    "fields": {
+      "name": "Офисная мебель",
+      "slug": "furniture-office",
+      "parent": 1,
+      "description": "Столы, стулья, кабинеты для офисов",
+      "icon": "💼"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 102,
+    "fields": {
+      "name": "Мягкая мебель",
+      "slug": "furniture-soft",
+      "parent": 1,
+      "description": "Диваны, кресла, кровати",
+      "icon": "🛋️"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 103,
+    "fields": {
+      "name": "Кухонная мебель",
+      "slug": "furniture-kitchen",
+      "parent": 1,
+      "description": "Кухонные гарнитуры, столешницы",
+      "icon": "🍽️"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 104,
+    "fields": {
+      "name": "Мебель для HoReCa",
+      "slug": "furniture-horeca",
+      "parent": 1,
+      "description": "Мебель для ресторанов и отелей",
+      "icon": "🏨"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 2,
+    "fields": {
+      "name": "Строительство и ремонт",
+      "slug": "construction",
+      "parent": null,
+      "description": "Стройматериалы, инструменты, оборудование",
+      "icon": "🏗️"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 201,
+    "fields": {
+      "name": "Сухие смеси и цемент",
+      "slug": "construction-drymix",
+      "parent": 2,
+      "description": "Цемент, штукатурка, шпаклевка",
+      "icon": "🧱"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 202,
+    "fields": {
+      "name": "Кровельные материалы",
+      "slug": "construction-roofing",
+      "parent": 2,
+      "description": "Кровля, гидроизоляция",
+      "icon": "🏠"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 203,
+    "fields": {
+      "name": "Теплоизоляция",
+      "slug": "construction-insulation",
+      "parent": 2,
+      "description": "Минвата, пенополистирол",
+      "icon": "🔥"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 204,
+    "fields": {
+      "name": "Инструменты",
+      "slug": "construction-tools",
+      "parent": 2,
+      "description": "Электроинструменты, ручной инструмент",
+      "icon": "🔧"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 205,
+    "fields": {
+      "name": "Сантехника",
+      "slug": "construction-plumbing",
+      "parent": 2,
+      "description": "Трубы, смесители, санфаянс",
+      "icon": "🚿"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 3,
+    "fields": {
+      "name": "Текстиль и одежда",
+      "slug": "textile",
+      "parent": null,
+      "description": "Ткани, одежда, трикотаж",
+      "icon": "👕"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 301,
+    "fields": {
+      "name": "Одежда оптом",
+      "slug": "textile-apparel",
+      "parent": 3,
+      "description": "Мужская, женская, детская одежда",
+      "icon": "👔"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 302,
+    "fields": {
+      "name": "Постельное белье",
+      "slug": "textile-bedding",
+      "parent": 3,
+      "description": "Постельный и столовой текстиль",
+      "icon": "🛏️"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 303,
+    "fields": {
+      "name": "Ткани и материалы",
+      "slug": "textile-fabrics",
+      "parent": 3,
+      "description": "Натуральные и синтетические ткани",
+      "icon": "🧵"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 304,
+    "fields": {
+      "name": "Рабочая спецодежда",
+      "slug": "textile-workwear",
+      "parent": 3,
+      "description": "Спецовки, униформа, СИЗ",
+      "icon": "🦺"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 4,
+    "fields": {
+      "name": "Продукты питания",
+      "slug": "food",
+      "parent": null,
+      "description": "Продукты питания и напитки",
+      "icon": "🍎"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 401,
+    "fields": {
+      "name": "Консервы и полуфабрикаты",
+      "slug": "food-canned",
+      "parent": 4,
+      "description": "Консервированные продукты, заморозка",
+      "icon": "入"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 402,
+    "fields": {
+      "name": "Снэки и сухофрукты",
+      "slug": "food-snacks",
+      "parent": 4,
+      "description": "Чипсы, орехи, сухофрукты",
+      "icon": "🥜"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 403,
+    "fields": {
+      "name": "Напитки",
+      "slug": "food-beverages",
+      "parent": 4,
+      "description": "Соки, вода, безалкогольные напитки",
+      "icon": "🥤"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 404,
+    "fields": {
+      "name": "Мясо и рыба",
+      "slug": "food-meat",
+      "parent": 4,
+      "description": "Мясные и рыбные продукты",
+      "icon": "🥩"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 405,
+    "fields": {
+      "name": "Зерно и крупы",
+      "slug": "food-grains",
+      "parent": 4,
+      "description": "Зерновые, мука, крупы",
+      "icon": "🌾"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 5,
+    "fields": {
+      "name": "Электроника и техника",
+      "slug": "electronics",
+      "parent": null,
+      "description": "Бытовая и промышленная электроника",
+      "icon": "📱"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 501,
+    "fields": {
+      "name": "Смартфоны и планшеты",
+      "slug": "electronics-mobile",
+      "parent": 5,
+      "description": "Мобильные устройства, аксессуары",
+      "icon": "📲"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 502,
+    "fields": {
+      "name": "Бытовая техника",
+      "slug": "electronics-appliances",
+      "parent": 5,
+      "description": "Холодильники, стиралки, ТВ",
+      "icon": "🧊"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 503,
+    "fields": {
+      "name": "Комплектующие",
+      "slug": "electronics-components",
+      "parent": 5,
+      "description": "Чипы, платы, электронные компоненты",
+      "icon": "⚡"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 504,
+    "fields": {
+      "name": "Аудио и видео",
+      "slug": "electronics-audio",
+      "parent": 5,
+      "description": "Наушники, колонки, камеры",
+      "icon": "🎧"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 6,
+    "fields": {
+      "name": "Автотовары",
+      "slug": "auto",
+      "parent": null,
+      "description": "Запчасти и аксессуары для авто",
+      "icon": "🚗"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 601,
+    "fields": {
+      "name": "Запчасти",
+      "slug": "auto-parts",
+      "parent": 6,
+      "description": "Двигатели, ходовка, электрика",
+      "icon": "🔧"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 602,
+    "fields": {
+      "name": "Аксессуары",
+      "slug": "auto-accessories",
+      "parent": 6,
+      "description": "Чехлы, коврики, электроника",
+      "icon": "🚙"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 603,
+    "fields": {
+      "name": "Шины и диски",
+      "slug": "auto-tires",
+      "parent": 6,
+      "description": "Шины, литые диски",
+      "icon": "ข"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 7,
+    "fields": {
+      "name": "Бытовая химия",
+      "slug": "chemicals",
+      "parent": null,
+      "description": "Моющие средства и химикаты",
+      "icon": "🧽"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 701,
+    "fields": {
+      "name": "Средства для стирки",
+      "slug": "chemicals-laundry",
+      "parent": 7,
+      "description": "Порошки, кондиционеры, пятновыводители",
+      "icon": "🧺"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 702,
+    "fields": {
+      "name": "Чистящие средства",
+      "slug": "chemicals-cleaners",
+      "parent": 7,
+      "description": "Для кухни, ванной, универмагов",
+      "icon": "🧼"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 703,
+    "fields": {
+      "name": "Автохимия",
+      "slug": "chemicals-auto",
+      "parent": 7,
+      "description": "Для ухода за автомобилем",
+      "icon": "🚘"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 8,
+    "fields": {
+      "name": "Косметика и парфюмерия",
+      "slug": "cosmetics",
+      "parent": null,
+      "description": "Косметические средства и парфюмерия",
+      "icon": "💄"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 801,
+    "fields": {
+      "name": "Уход за лицом",
+      "slug": "cosmetics-skincare",
+      "parent": 8,
+      "description": "Кремы, сыворотки, маски",
+      "icon": "🧴"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 802,
+    "fields": {
+      "name": "Декоративная косметика",
+      "slug": "cosmetics-makeup",
+      "parent": 8,
+      "description": "Тушь, помада, тени",
+      "icon": "💋"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 803,
+    "fields": {
+      "name": "Парфюмерия",
+      "slug": "cosmetics-perfume",
+      "parent": 8,
+      "description": "Духи, туалетная вода",
+      "icon": "🌸"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 804,
+    "fields": {
+      "name": "Уход за волосами",
+      "slug": "cosmetics-haircare",
+      "parent": 8,
+      "description": "Шампуни, кондиционеры, краски",
+      "icon": "🧖"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 9,
+    "fields": {
+      "name": "Лесопромышленность",
+      "slug": "timber",
+      "parent": null,
+      "description": "Древесина и изделия из дерева",
+      "icon": "🌲"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 901,
+    "fields": {
+      "name": "Пиломатериалы",
+      "slug": "timber-lumber",
+      "parent": 9,
+      "description": "Брус, доска, вагонка",
+      "icon": "🪵"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 902,
+    "fields": {
+      "name": "Фанера и ДСП",
+      "slug": "timber-plywood",
+      "parent": 9,
+      "description": "Фанера, OSB, ДСП, МДФ",
+      "icon": "📐"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 903,
+    "fields": {
+      "name": "Мебельный щит",
+      "slug": "timber-furniture-parts",
+      "parent": 9,
+      "description": "Щиты, заготовки для мебели",
+      "icon": "🪚"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 10,
+    "fields": {
+      "name": "Агропромышленность",
+      "slug": "agro",
+      "parent": null,
+      "description": "Сельскохозяйственная продукция",
+      "icon": "🚜"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 1001,
+    "fields": {
+      "name": "Зерновые культуры",
+      "slug": "agro-grain",
+      "parent": 10,
+      "description": "Пшеница, ячмень, кукуруза",
+      "icon": "🌾"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 1002,
+    "fields": {
+      "name": "Овощи и фрукты",
+      "slug": "agro-vegetables",
+      "parent": 10,
+      "description": "Свежие овощи и фрукты оптом",
+      "icon": "🥕"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 1003,
+    "fields": {
+      "name": "Молочные продукты",
+      "slug": "agro-dairy",
+      "parent": 10,
+      "description": "Молоко, сыр, масло",
+      "icon": "🥛"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 11,
+    "fields": {
+      "name": "Агрохимия",
+      "slug": "agro-chemicals",
+      "parent": null,
+      "description": "Удобрения и средства защиты растений",
+      "icon": "🧪"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 1101,
+    "fields": {
+      "name": "Минеральные удобрения",
+      "slug": "agro-chemicals-fertilizers",
+      "parent": 11,
+      "description": "Азотные, фосфорные, калийные",
+      "icon": "⛅"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 1102,
+    "fields": {
+      "name": "Пестициды и гербициды",
+      "slug": "agro-chemicals-pesticides",
+      "parent": 11,
+      "description": "Средства защиты растений",
+      "icon": "🐛"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 1103,
+    "fields": {
+      "name": "Семена",
+      "slug": "agro-chemicals-seeds",
+      "parent": 11,
+      "description": "Семена сельхозкультур",
+      "icon": "🌱"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 12,
+    "fields": {
+      "name": "Промышленное оборудование",
+      "slug": "industrial",
+      "parent": null,
+      "description": "Оборудование для производств",
+      "icon": "⚙️"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 1201,
+    "fields": {
+      "name": "Тяжелое оборудование",
+      "slug": "industrial-heavy",
+      "parent": 12,
+      "description": "Экскаваторы, бульдозеры, краны",
+      "icon": "🏗️"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 1202,
+    "fields": {
+      "name": "Станки металлообрабатывающие",
+      "slug": "industrial-machining",
+      "parent": 12,
+      "description": "Токарные, фрезерные, сверлильные",
+      "icon": "🔩"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 1203,
+    "fields": {
+      "name": "Компрессоры и насосы",
+      "slug": "industrial-pumps",
+      "parent": 12,
+      "description": "Воздуходувки, компрессоры, насосы",
+      "icon": "💨"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 1204,
+    "fields": {
+      "name": "Конвейерные системы",
+      "slug": "industrial-conveyors",
+      "parent": 12,
+      "description": "Транспортеры, ленты, ролики",
+      "icon": "🔄"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 13,
+    "fields": {
+      "name": "Подарки и сувениры",
+      "slug": "gifts",
+      "parent": null,
+      "description": "Сувенирная продукция и подарки",
+      "icon": "🎁"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 1301,
+    "fields": {
+      "name": "Бизнес-сувениры",
+      "slug": "gifts-corporate",
+      "parent": 13,
+      "description": "Корпоративные подарки, брендирование",
+      "icon": "💼"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 1302,
+    "fields": {
+      "name": "Народные промыслы",
+      "slug": "gifts-handmade",
+      "parent": 13,
+      "description": "Ручная работа, народные сувениры",
+      "icon": "🎨"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 1303,
+    "fields": {
+      "name": "Праздничные товары",
+      "slug": "gifts-holiday",
+      "parent": 13,
+      "description": "Новогодние, праздничные наборы",
+      "icon": "🎄"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 14,
+    "fields": {
+      "name": "Услуги для бизнеса",
+      "slug": "b2b-services",
+      "parent": null,
+      "description": "B2B-услуги и консалтинг",
+      "icon": "💼"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 1401,
+    "fields": {
+      "name": "Бухгалтерские услуги",
+      "slug": "b2b-services-accounting",
+      "parent": 14,
+      "description": "Аутсорсинг бухгалтерии",
+      "icon": "🧾"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 1402,
+    "fields": {
+      "name": "Маркетинг и реклама",
+      "slug": "b2b-services-marketing",
+      "parent": 14,
+      "description": "SMM, SEO, контекстная реклама",
+      "icon": "📢"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 1403,
+    "fields": {
+      "name": "IT-услуги",
+      "slug": "b2b-services-it",
+      "parent": 14,
+      "description": "Разработка, внедрение, поддержка",
+      "icon": "💻"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 16,
+    "fields": {
+      "name": "Юридические услуги",
+      "slug": "legal",
+      "parent": null,
+      "description": "Юридический консалтинг и услуги",
+      "icon": "⚖️"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 1601,
+    "fields": {
+      "name": "Регистрация бизнеса",
+      "slug": "legal-incorporation",
+      "parent": 16,
+      "description": "Регистрация ООО, ИП, филиалов",
+      "icon": "📋"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 1602,
+    "fields": {
+      "name": "Судебное представительство",
+      "slug": "legal-litigation",
+      "parent": 16,
+      "description": "Услуги адвокатов в судах",
+      "icon": "🗂️"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 1603,
+    "fields": {
+      "name": "Корпоративное право",
+      "slug": "legal-corporate",
+      "parent": 16,
+      "description": "Сделки M&A, договоры",
+      "icon": "📑"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 17,
+    "fields": {
+      "name": "Таможенные услуги",
+      "slug": "customs",
+      "parent": null,
+      "description": "Таможенное оформление и логистика",
+      "icon": "🛃"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 1701,
+    "fields": {
+      "name": "Таможенное оформление",
+      "slug": "customs-clearance",
+      "parent": 17,
+      "description": "Оформление деклараций, пошлины",
+      "icon": "📄"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 1702,
+    "fields": {
+      "name": "Брокерские услуги",
+      "slug": "customs-brokerage",
+      "parent": 17,
+      "description": "Таможенные брокеры",
+      "icon": "🔖"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 1703,
+    "fields": {
+      "name": "Сертификация",
+      "slug": "customs-certification",
+      "parent": 17,
+      "description": "Сертификаты соответствия, СГР",
+      "icon": "✅"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 18,
+    "fields": {
+      "name": "Логистические услуги",
+      "slug": "logistics",
+      "parent": null,
+      "description": "Перевозки и складские услуги",
+      "icon": "🚛"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 1801,
+    "fields": {
+      "name": "Грузоперевозки",
+      "slug": "logistics-freight",
+      "parent": 18,
+      "description": "Авто, ж/д, авиаперевозки",
+      "icon": "🚚"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 1802,
+    "fields": {
+      "name": "Складские услуги",
+      "slug": "logistics-warehouse",
+      "parent": 18,
+      "description": "Хранение, комплектация, fulfillment",
+      "icon": "🏭"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 1803,
+    "fields": {
+      "name": "Экспедирование",
+      "slug": "logistics-forwarding",
+      "parent": 18,
+      "description": "Экспедиторские услуги",
+      "icon": "🧭"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 19,
+    "fields": {
+      "name": "Всё для дома",
+      "slug": "home",
+      "parent": null,
+      "description": "Товары для дома и быта",
+      "icon": "🏠"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 1901,
+    "fields": {
+      "name": "Посуда и кухня",
+      "slug": "home-kitchen",
+      "parent": 19,
+      "description": "Кастрюли, сковороды, столовые приборы",
+      "icon": "🍳"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 1902,
+    "fields": {
+      "name": "Хранение и организация",
+      "slug": "home-storage",
+      "parent": 19,
+      "description": "Контейнеры, корзины, системы хранения",
+      "icon": "📦"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 1903,
+    "fields": {
+      "name": "Декор и интерьер",
+      "slug": "home-decor",
+      "parent": 19,
+      "description": "Картины, вазы, декоративные элементы",
+      "icon": "🖼️"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 20,
+    "fields": {
+      "name": "Медицинское оборудование",
+      "slug": "medical",
+      "parent": null,
+      "description": "Медтехника и оборудование",
+      "icon": "🏥"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 2001,
+    "fields": {
+      "name": "Диагностическое оборудование",
+      "slug": "medical-diagnostics",
+      "parent": 20,
+      "description": "Анализаторы, сканеры, УЗИ",
+      "icon": "🔬"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 2002,
+    "fields": {
+      "name": "Медицинская мебель",
+      "slug": "medical-furniture",
+      "parent": 20,
+      "description": "Кушетки, кровати, шкафы",
+      "icon": "🛏️"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 2003,
+    "fields": {
+      "name": "Расходные материалы",
+      "slug": "medical-consumables",
+      "parent": 20,
+      "description": "Бинты, шприцы, перчатки",
+      "icon": "💉"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 21,
+    "fields": {
+      "name": "Упаковочные материалы",
+      "slug": "packaging",
+      "parent": null,
+      "description": "Упаковка и маркировка",
+      "icon": "📦"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 2101,
+    "fields": {
+      "name": "Картонная упаковка",
+      "slug": "packaging-cardboard",
+      "parent": 21,
+      "description": "Коробки, коробки, лотки",
+      "icon": "📦"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 2102,
+    "fields": {
+      "name": "Пластиковая упаковка",
+      "slug": "packaging-plastic",
+      "parent": 21,
+      "description": "Пленка, контейнеры, бутылки",
+      "icon": "🫙"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 2103,
+    "fields": {
+      "name": "Упаковочное оборудование",
+      "slug": "packaging-equipment",
+      "parent": 21,
+      "description": "Термоупаковщики, фасовочные машины",
+      "icon": "⚙️"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 22,
+    "fields": {
+      "name": "Инструменты и станки",
+      "slug": "tools",
+      "parent": null,
+      "description": "Ручной инструмент и станки",
+      "icon": "🔨"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 2201,
+    "fields": {
+      "name": "Ручной инструмент",
+      "slug": "tools-hand",
+      "parent": 22,
+      "description": "Молотки, отвертки, ключи",
+      "icon": "🔧"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 2202,
+    "fields": {
+      "name": "Электроинструменты",
+      "slug": "tools-power",
+      "parent": 22,
+      "description": "Дрели, пилы, шлифмашины",
+      "icon": "⚡"
+    }
+  },
+  {
+    "model": "suppliers.category",
+    "pk": 2203,
+    "fields": {
+      "name": "Измерительный инструмент",
+      "slug": "tools-measuring",
+      "parent": 22,
+      "description": "Лазеры, уровни, штангенциркули",
+      "icon": "📏"
+    }
+  }
+]
