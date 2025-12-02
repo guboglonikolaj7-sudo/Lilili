@@ -85,8 +85,7 @@ class Supplier(models.Model):
         ("RUB", "RUB"),
     ])
     
-    contact_email = models.EmailField("Контактный email", blank=True)
-    contact_phone = models.CharField("Контактный телефон", max_length=20, blank=True)
+    
     website = models.URLField("Сайт поставщика", blank=True, validators=[URLValidator()])
     
     # Иерархическая категория (можно привязать к любому уровню)
@@ -335,3 +334,64 @@ class VerificationCheck(models.Model):
         if self.status == VerificationStatus.COMPLETED:
             self.calculate_overall_score()
         super().save(*args, **kwargs)
+# ======================================
+# ПЛАТНЫЕ КОНТАКТЫ ПОСТАВЩИКОВ
+# ======================================
+
+from django.db import models
+import re
+from django.core.exceptions import ValidationError
+from django.utils import timezone
+
+class SupplierContact(models.Model):
+    """Контакт поставщика (WhatsApp, Telegram, VK, WeChat, Email, Телефон)"""
+    
+    MESSENGER_CHOICES = [
+        ('whatsapp', 'WhatsApp'),
+        ('telegram', 'Telegram'),
+        ('vk', 'ВКонтакте'),
+        ('wechat', 'WeChat'),
+        ('phone', 'Телефон'),
+        ('email', 'Email'),
+    ]
+    
+    supplier = models.ForeignKey(
+        Supplier,
+        on_delete=models.CASCADE,
+        related_name='contacts',
+        verbose_name="Поставщик"
+    )
+    contact_type = models.CharField("Тип", max_length=20, choices=MESSENGER_CHOICES)
+    value = models.CharField("Значение", max_length=255)
+    is_verified = models.BooleanField("Проверен", default=False)
+    price_credits = models.PositiveIntegerField("Стоимость", default=1)
+    added_at = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        unique_together = ('supplier', 'contact_type', 'value')
+        verbose_name = "Контакт поставщика"
+        verbose_name_plural = "Контакты поставщиков"
+
+    def __str__(self):
+        return f"{self.supplier.name} - {self.get_contact_type_display()}"
+
+
+class ContactAccess(models.Model):
+    """История покупки контакта"""
+    
+    user = models.ForeignKey(
+        'users.User',
+        on_delete=models.CASCADE,
+        related_name='purchased_contacts'
+    )
+    contact = models.ForeignKey(SupplierContact, on_delete=models.CASCADE)
+    purchased_at = models.DateTimeField(auto_now_add=True)
+    credits_spent = models.PositiveIntegerField(default=1)
+    
+    class Meta:
+        unique_together = ('user', 'contact')
+        verbose_name = "Доступ к контакту"
+        verbose_name_plural = "Доступы к контактам"
+
+    def __str__(self):
+        return f"{self.user.email} → {self.contact.supplier.name}"
